@@ -12,17 +12,17 @@ public:
 	Student();
 	~Student();
 	Student(string, string, int, int, int);
-	void get_surname(string);
-	void get_name(string);
-	void get_scores_maths(int);
-	void get_scores_it(int);
-	void get_scores_physics(int);
+	void set_surname(string);
+	void set_name(string);
+	void set_scores_maths(int);
+	void set_scores_it(int);
+	void set_scores_physics(int);
 	friend bool comparison(int, int, int, Student);
-	string set_surname();
-	string set_name();
-	int set_scores_maths();
-	int set_scores_it();
-	int set_scores_physics();
+	string get_surname();
+	string get_name();
+	int get_scores_maths();
+	int get_scores_it();
+	int get_scores_physics();
 	void print();
 };
 
@@ -47,27 +47,27 @@ Student::Student(string surname, string name, int scores_maths, int scores_it, i
 	this->scores_physics = scores_physics;
 }
 
-void Student::get_surname(string a)
+void Student::set_surname(string a)
 {
 	this->surname = a;
 }
 
-void Student::get_name(string a)
+void Student::set_name(string a)
 {
 	this->name = a;
 }
 
-void Student::get_scores_maths(int a)
+void Student::set_scores_maths(int a)
 {
 	this->scores_maths = a;
 }
 
-void Student::get_scores_it(int a)
+void Student::set_scores_it(int a)
 {
 	this->scores_it = a;
 }
 
-void Student::get_scores_physics(int a)
+void Student::set_scores_physics(int a)
 {
 	this->scores_physics = a;
 }
@@ -85,27 +85,27 @@ void Student::print()
 	cout << " " << surname << " " << name << " " << scores_maths << " " << scores_it << " " << scores_physics << " [ " << double(scores_maths + scores_it + scores_physics)/3 << " ] " << endl;
 }
 
-string Student::set_surname()
+string Student::get_surname()
 {
 	return this->surname;
 }
 
-string Student::set_name()
+string Student::get_name()
 {
 	return this->name;
 }
 
-int Student::set_scores_maths()
+int Student::get_scores_maths()
 {
 	return this->scores_maths;
 }
 
-int Student::set_scores_it()
+int Student::get_scores_it()
 {
 	return this->scores_it;
 }
 
-int Student::set_scores_physics()
+int Student::get_scores_physics()
 {
 	return this->scores_physics;
 }
@@ -135,17 +135,17 @@ int main()
 
 			if (comparison(result_maths, result_it, result_physics, total_students[j]))
 			{
-				r_s = total_students[j].set_surname();
-				r_n = total_students[j].set_name();
-				r_m = total_students[j].set_scores_maths();
-				r_i = total_students[j].set_scores_it();
-				r_p = total_students[j].set_scores_physics();
+				r_s = total_students[j].get_surname();
+				r_n = total_students[j].get_name();
+				r_m = total_students[j].get_scores_maths();
+				r_i = total_students[j].get_scores_it();
+				r_p = total_students[j].get_scores_physics();
 
-				total_students[j].get_surname(surname);
-				total_students[j].get_name(name);
-				total_students[j].get_scores_maths(result_maths);
-				total_students[j].get_scores_it(result_it);
-				total_students[j].get_scores_physics(result_physics);
+				total_students[j].set_surname(surname);
+				total_students[j].set_name(name);
+				total_students[j].set_scores_maths(result_maths);
+				total_students[j].set_scores_it(result_it);
+				total_students[j].set_scores_physics(result_physics);
 
 				surname = r_s;
 				name = r_n;
