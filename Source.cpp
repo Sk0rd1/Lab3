@@ -6,18 +6,20 @@ using namespace std;
 
 class Student
 {
-	string surname;
+	string surname, name;
 	int scores_maths, scores_it, scores_physics;
 public:
 	Student();
 	~Student();
-	Student(string, int, int, int);
+	Student(string, string, int, int, int);
 	void get_surname(string);
+	void get_name(string);
 	void get_scores_maths(int);
 	void get_scores_it(int);
 	void get_scores_physics(int);
 	friend bool comparison(int, int, int, Student);
 	string set_surname();
+	string set_name();
 	int set_scores_maths();
 	int set_scores_it();
 	int set_scores_physics();
@@ -28,6 +30,7 @@ Student::Student()
 {
 
 	this->surname = "-";
+	this->name = "-";
 	this->scores_maths = 0;
 	this->scores_it = 0;
 	this->scores_physics = 0;
@@ -35,9 +38,10 @@ Student::Student()
 
 Student::~Student() {}
 
-Student::Student(string surname, int scores_maths, int scores_it, int scores_physics)
+Student::Student(string surname, string name, int scores_maths, int scores_it, int scores_physics)
 {
 	this->surname = surname;
+	this->name = name;
 	this->scores_maths = scores_maths;
 	this->scores_it = scores_it;
 	this->scores_physics = scores_physics;
@@ -46,6 +50,11 @@ Student::Student(string surname, int scores_maths, int scores_it, int scores_phy
 void Student::get_surname(string a)
 {
 	this->surname = a;
+}
+
+void Student::get_name(string a)
+{
+	this->name = a;
 }
 
 void Student::get_scores_maths(int a)
@@ -73,12 +82,17 @@ bool comparison(int result_maths, int result_it, int result_physics, Student one
 
 void Student::print()
 {
-	cout << " " << surname << " " << scores_maths << " " << scores_it << " " << scores_physics << endl;
+	cout << " " << surname << " " << name << " " << scores_maths << " " << scores_it << " " << scores_physics << " [ " << double(scores_maths + scores_it + scores_physics)/3 << " ] " << endl;
 }
 
 string Student::set_surname()
 {
 	return this->surname;
+}
+
+string Student::set_name()
+{
+	return this->name;
 }
 
 int Student::set_scores_maths()
@@ -112,26 +126,29 @@ int main()
 	file.seekg(0);
 
 	int result_maths, result_it, result_physics, r_m, r_i, r_p;
-	string name, r_s;
+	string name, surname, r_s, r_n;
 	for (int i = 0; i < num; i++)
 	{
-		file >> name >> result_maths >> result_it >> result_physics;
+		file >> surname >> name >> result_maths >> result_it >> result_physics;
 		for (int j = 0; j < SIZE; j++)
 		{
 
 			if (comparison(result_maths, result_it, result_physics, total_students[j]))
 			{
 				r_s = total_students[j].set_surname();
+				r_n = total_students[j].set_name();
 				r_m = total_students[j].set_scores_maths();
 				r_i = total_students[j].set_scores_it();
 				r_p = total_students[j].set_scores_physics();
 
-				total_students[j].get_surname(name);
+				total_students[j].get_surname(surname);
+				total_students[j].get_name(name);
 				total_students[j].get_scores_maths(result_maths);
 				total_students[j].get_scores_it(result_it);
 				total_students[j].get_scores_physics(result_physics);
 
-				name = r_s;
+				surname = r_s;
+				name = r_n;
 				result_maths = r_m;
 				result_it = r_i;
 				result_physics = r_p;
@@ -143,4 +160,5 @@ int main()
 	{
 		total_students[i].print();
 	}
+	delete[] total_students;
 }
